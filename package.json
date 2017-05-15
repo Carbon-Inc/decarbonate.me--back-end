@@ -1,0 +1,49 @@
+{
+  "name": "decarbonate.me",
+  "version": "0.0.1",
+  "description": "decarbonate back-end (JS midterm project)",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carbon-Inc/decarbonate.me--back-end.git"
+  },
+  "keywords": [
+    "express",
+    "mongoDB",
+    "nodejs"
+  ],
+  "author": "Brianna Burrows, Scott Brenden, Steven Johnson and Cameron Bacon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Carbon-Inc/decarbonate.me--back-end/issues"
+  },
+  "homepage": "https://github.com/Carbon-Inc/decarbonate.me--back-end#readme",
+  "devDependencies": {
+    "aws-sdk-mock": "^1.7.0",
+    "chai": "^3.5.0",
+    "coveralls": "^2.13.1",
+    "eslint": "^3.19.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.1",
+    "mocha-lcov-reporter": "^1.3.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "debug": "^2.6.6",
+    "dot-env": "0.0.1",
+    "express": "^4.15.2",
+    "http-errors": "^1.6.1",
+    "mongoose": "^4.9.9",
+    "morgan": "^1.8.1",
+    "superagent": "^3.5.2"
+  }
+}
