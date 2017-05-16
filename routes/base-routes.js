@@ -7,7 +7,7 @@ const ebRouter = require('./eb-routes');
 module.exports = function(router) {
   router.post('/events', (req, res) => {
     debug('#POST /decarbonate/events');
-    return ebRouter(req)
+    return ebRouter()
     .then(events => res.json(events))
     .catch(err => res.sendStatus(err.status));
   });
