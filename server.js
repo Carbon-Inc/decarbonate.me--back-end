@@ -21,7 +21,7 @@ mongoose.connect(MONGODB_URI);
 app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser);
-app.use('/decarbonate', require('./routes/eb-routes')(router));
+app.use('/decarbonate', require('./routes/base-routes')(router));
 
 const server = module.exports = app.listen(PORT, () => debug(`Listening on ${PORT}`));
 
