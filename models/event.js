@@ -7,7 +7,6 @@ const Schema = mongoose.Schema;
 const eventSchema = Schema({
   eventId: {type: String, required: true},
   userId: {type: String, required: true},
-  dcUserId: {type: Schema.Types.ObjectId, required: true},
   name: {type: String, required: true},
   start: {type: Date, required: true},
   end: {type: Date, required: true},
