@@ -6,10 +6,12 @@ const Event = require('../models/event');
 
 module.exports = exports = {};
 
-exports.getEventIds = function(orders) {
+exports.getEventIds = function(body) {
   debug('#getEventIds');
-
-  let eventIds = orders.orders.map(ele => ele.event_id);
+  body = JSON.parse(body);
+  let orders = body.orders;
+  let eventIds = orders.map(ele => ele.event_id);
+  console.log(eventIds);
 
   return Promise.resolve(eventIds);
 };
@@ -17,40 +19,41 @@ exports.getEventIds = function(orders) {
 exports.getEventInfo = function(event) {
   debug('#getEventInfo');
 
+  event = JSON.parse(event);
   let eventObj = {
     name: event.name.text,
     description: event.description.text,
     start: event.start.local,
     end: event.end.local,
-    event_id: event.id,
-    venue_id: event.venue_id,
-    logo_id: event.logo_id,
-    category_id: event.category_id,
+    eventId: event.id,
+    venueId: event.venue_id,
+    logoId: event.logo_id,
+    categoryId: event.category_id,
   };
   return Promise.resolve(eventObj);
 };
 
 exports.getVenueInfo = function(venue, id) {
   debug('#getVenueInfo');
-
+  venue = JSON.parse(venue);
   return Event.findByIdAndUpdate(id, {address: venue.localized_address_display}, {new: true});
 };
 
 exports.getLogoInfo = function(media, id) {
   debug('#getLogoInfo');
-
+  media = JSON.parse(media);
   return Event.findByIdAndUpdate(id, {img: media.original.url}, {new: true});
 };
 
 exports.getCategoryInfo = function(category, id) {
   debug('#getCategoryInfo');
-
+  category = JSON.parse(category);
   return Event.findByIdAndUpdate(id, {category: category.name}, {new: true});
 };
 
-exports.createEvent = function(event) {
+exports.createEvent = function(newEvent) {
   debug('#createEvent');
-  return new Event(event).save();
+  return new Event(newEvent).save();
 };
 
 exports.fetchEvents = function() {
