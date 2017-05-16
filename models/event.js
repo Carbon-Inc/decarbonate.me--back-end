@@ -15,7 +15,7 @@ const eventSchema = Schema({
   originAddress: {type: String, default: null},
   img: {type: String, required: true},
   category: {type: String, required: true},
-  carbonTonnes: {type: Number, default: null},
+  carbon: {type: Number, default: null},
   carbonPrice: {type: Number, default: null},
   paid: {type: Boolean, default: false},
   transport: {type: String, default: null},
