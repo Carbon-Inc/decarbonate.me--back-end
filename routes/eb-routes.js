@@ -7,7 +7,6 @@ const ebURL = 'https://www.eventbriteapi.com/v3';
 const EB_ACCESS_TOKEN = process.env.EB_ACCESS_TOKEN;
 
 module.exports = function() {
-  let venueIds = [];
   superagent.get(`${ebURL}/users/me/orders`)
   .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
   .then(res => {
@@ -23,61 +22,40 @@ module.exports = function() {
         return ebController.getEventInfo(res.text);
       })
       .then(newEvent => {
-        venueIds.push(newEvent.venueId);
-        console.log(venueIds);
-        console.log(newEvent);
         return ebController.createEvent(newEvent);
       })
       .then(eventObj => {
-        venueIds.forEach(ele => {
-          superagent.get(`${ebURL}/venues/${ele}`)
+        debug('#GET /venues/:id');
+        superagent.get(`${ebURL}/venues/${eventObj.venueId}`)
+        .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
+        .then(res => {
+          return ebController.getVenueInfo(res.text, eventObj._id);
+        })
+        .then(() => {
+          debug('#GET /media/:id');
+          superagent.get(`${ebURL}/media/${eventObj.logoId}`)
           .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
           .then(res => {
-            debug('#GET /venues/:id');
-            return ebController.getVenueInfo(res.text, eventObj._id);
+            return ebController.getLogoInfo(res.text, eventObj._id);
           })
-          .then(upEvent => {
-            superagent.get(`${ebURL}/media/${upEvent.logoId}`)
+          .then(() => {
+            debug('#GET /categories/:id');
+            superagent.get(`${ebURL}/categories/${eventObj.categoryId}`)
             .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
-            .then(res => ebController.getLogoInfo(res.text, upEvent._id))
-            .catch(err => Promise.reject(err));
-          })
-          .then(data => {
-            superagent.get(`${ebURL}/categories/${data.categoryId}`)
-            .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
-            .then(res => ebController.getCategoryInfo(res.text, data._id))
+            .then(res => {
+              return ebController.getCategoryInfo(res.text, eventObj._id);
+            })
+            .then(() => {
+              return ebController.fetchEvents();
+            })
             .catch(err => Promise.reject(err));
           })
           .catch(err => Promise.reject(err));
-        });
+        })
+        .catch(err => Promise.reject(err));
       })
       .catch(err => Promise.reject(err));
     });
-    return ebController.fetchEvents();
   })
-  // .then(eventObj => {
-  //   venueIds.forEach(ele => {
-  //     superagent.get(`${ebURL}/venues/${ele}`)
-  //     .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
-  //     .then(venue => {
-  //       debug('#GET /venues/:id');
-  //       return ebController.getVenueInfo(venue, eventObj.eventId);
-  //     })
-  //     .then(upEvent => {
-  //       superagent.get(`${ebURL}/media/${upEvent.logo_id}`)
-  //       .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
-  //       .then(media => ebController.getLogoInfo(media, upEvent.eventId))
-  //       .catch(err => Promise.reject(err));
-  //     })
-  //     .then(data => {
-  //       superagent.get(`${ebURL}/categories/${data.category_id}`)
-  //       .set('Authorization', `Bearer ${EB_ACCESS_TOKEN}`)
-  //       .then(category => ebController.getCategoryInfo(category, data.eventId))
-  //       .catch(err => Promise.reject(err));
-  //     })
-  //     .catch(err => Promise.reject(err));
-  //   });
-  //   return ebController.fetchEvents();
-  // })
   .catch(err => Promise.reject(err));
 };

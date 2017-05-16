@@ -11,7 +11,6 @@ exports.getEventIds = function(body) {
   body = JSON.parse(body);
   let orders = body.orders;
   let eventIds = orders.map(ele => ele.event_id);
-  console.log(eventIds);
 
   return Promise.resolve(eventIds);
 };
@@ -36,7 +35,7 @@ exports.getEventInfo = function(event) {
 exports.getVenueInfo = function(venue, id) {
   debug('#getVenueInfo');
   venue = JSON.parse(venue);
-  return Event.findByIdAndUpdate(id, {address: venue.localized_address_display}, {new: true});
+  return Event.findByIdAndUpdate(id, {address: venue.address.localized_address_display}, {new: true});
 };
 
 exports.getLogoInfo = function(media, id) {
