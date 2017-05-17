@@ -31,4 +31,25 @@ describe('event-base-routes', function() {
     });
 
   });
+
+  describe('#GET /decarbonate/events', function(){
+    it('should return 200 if given the proper route', done => {
+      chai.request(server)
+      .get('/decarbonate/events')
+      .end((err, res) => {
+        if(err) done(err);
+        expect(res).to.have.property('status', 200);
+        done();
+      });
+    });
+    it('should return 404 if given bad route', done => {
+      chai.request(server)
+      .get('decarbonate/badroute')
+      .end((err, res) => {
+        expect(res).to.have.property('status', 404);
+        done();
+      });
+    });
+  });
+
 });
