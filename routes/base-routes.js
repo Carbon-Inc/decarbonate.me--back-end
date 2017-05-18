@@ -14,7 +14,7 @@ module.exports = function(router) {
   router.post('/events', (req, res) => {
     debug('#POST /decarbonate/events');
     console.log(req.body);
-    let USER_ACCESS_TOKEN = JSON.parse(req.body.token);
+    let USER_ACCESS_TOKEN = req.body.token;
     console.log(USER_ACCESS_TOKEN);
     // return ebRouter('DGKS6UUHIPJAOSJRQVPD')
     return ebRouter(USER_ACCESS_TOKEN)
