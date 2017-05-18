@@ -10,10 +10,10 @@ const CLIENT_KEY = process.env.CLIENT_KEY;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 module.exports = function(router) {
-  router.get('/token/:code', urlParser, (req, res) => {
-    debug('#GET /decarbonate/token/:code');
-    console.log(req.params);
-    superagent.post(`https://www.eventbrite.com/oauth/token?code=${req.params.code}&client_secret=${CLIENT_SECRET}&client_id=${CLIENT_KEY}&grant_type=authorization_code`)
+  router.get('/token', urlParser, (req, res) => {
+    debug('#GET /decarbonate/token');
+    console.log(req.query);
+    superagent.post(`https://www.eventbrite.com/oauth/token?code=${req.query}&client_secret=${CLIENT_SECRET}&client_id=${CLIENT_KEY}&grant_type=authorization_code`)
     .set('Content-type', 'application/x-www-form-urlencoded')
     .then(data => {
       console.log(data);
