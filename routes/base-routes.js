@@ -1,18 +1,19 @@
 'use strict';
 
 const debug = require('debug')('decarbonate:base-routes');
-const superagent = require('superagent-bluebird-promise');
-const urlParser = require('../lib/parse-url');
+// const superagent = require('superagent-bluebird-promise');
+// const urlParser = require('../lib/parse-url');
 const ebRouter = require('./eb-routes');
 const ebController = require('../controllers/eb-controller');
 const bpRouter = require('./brighter-planet-routes');
-const CLIENT_KEY = process.env.CLIENT_KEY;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+// const CLIENT_KEY = process.env.CLIENT_KEY;
+// const CLIENT_SECRET = process.env.CLIENT_SECRET;
 let USER_ACCESS_TOKEN;
 
 module.exports = function(router) {
   router.get('/token', (req, res) => {
     debug('#GET /decarbonate/token');
+    USER_ACCESS_TOKEN = req.body;
     res.json(req.body);
     // USER_ACCESS_TOKEN = req.url.hash.split('token=')[1];
     // res.json(USER_ACCESS_TOKEN);
