@@ -5,7 +5,6 @@ const superagent = require('superagent-bluebird-promise');
 const ebController = require('../controllers/eb-controller');
 
 const ebURL = 'https://www.eventbriteapi.com/v3';
-// const EB_ACCESS_TOKEN = process.env.EB_ACCESS_TOKEN;
 
 module.exports = function(token) {
   debug('#ebRouter');
@@ -15,10 +14,7 @@ module.exports = function(token) {
     .then(res => {
       return ebController.getEventInfo(res.text);
     })
-    .then(events => {
-      return ebController.createEvent(events);
-    })
-    .then(() => resolve())
+    .then(events => resolve(events))
     .catch(err => reject(err));
   });
 };
