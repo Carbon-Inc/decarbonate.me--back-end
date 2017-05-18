@@ -7,14 +7,16 @@ const bpRouter = require('./brighter-planet-routes');
 let USER_ACCESS_TOKEN;
 
 module.exports = function(router) {
-  router.get('/token', (req, res) => {
-    debug('#GET /decarbonate/token');
-    USER_ACCESS_TOKEN = req.body;
-    res.json(req.body);
-  });
+  // router.post('/token', (req, res) => {
+  //   debug('#GET /decarbonate/token');
+  //   USER_ACCESS_TOKEN = req.body;
+  //   res.json(req.body);
+  // });
 
-  router.get('/events', (req, res) => {
+  router.post('/events', (req, res) => {
     debug('#GET /decarbonate/events');
+    let USER_ACCESS_TOKEN = req.body;
+    // return ebRouter('DGKS6UUHIPJAOSJRQVPD')
     return ebRouter(USER_ACCESS_TOKEN)
     .then(events => res.json(events))
     .catch(err => res.sendStatus(err.status));
