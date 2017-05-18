@@ -13,9 +13,9 @@ let USER_ACCESS_TOKEN;
 module.exports = function(router) {
   router.get('/token', (req, res) => {
     debug('#GET /decarbonate/token');
-    console.log(req);
-    USER_ACCESS_TOKEN = req.url.hash.split('token=')[1];
-    res.json(USER_ACCESS_TOKEN);
+    res.json(req.body);
+    // USER_ACCESS_TOKEN = req.url.hash.split('token=')[1];
+    // res.json(USER_ACCESS_TOKEN);
   });
 
   router.post('/events', (req, res) => {
