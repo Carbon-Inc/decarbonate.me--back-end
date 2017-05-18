@@ -10,22 +10,9 @@ const CLIENT_KEY = process.env.CLIENT_KEY;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 module.exports = function(router) {
-  router.get('/token', urlParser, (req, res) => {
-    debug('#GET /decarbonate/token');
-    const USER_AUTH_CODE = req.query.params.code;
-    console.log(USER_AUTH_CODE);
-    superagent.post('https://www.eventbrite.com/oauth/token')
-    .set('Content-type', 'application/x-www-form-urlencoded')
-    .field('code', `${USER_AUTH_CODE}`)
-    .field('client_secret', `${CLIENT_SECRET}`)
-    .field('client_id', `${CLIENT_KEY}`)
-    .field('grant_type', 'authorization_code')
-    .then(data => {
-      console.log(data);
-      res.send(data);
-    })
-    .catch(err => res.sendStatus(err.status));
-  });
+  // router.get('/token', urlParser, (req, res) => {
+  //   debug('#GET /decarbonate/token');
+  // });
 
   router.post('/events', (req, res) => {
     debug('#POST /decarbonate/events');
@@ -36,7 +23,12 @@ module.exports = function(router) {
 
   router.get('/events', (req, res) => {
     debug('#GET /decarbonate/events');
-    return ebController.fetchEvents()
+    const USER_ACCESS_TOKEN = req.query.params.code;
+    console.log(USER_ACCESS_TOKEN);
+    return ebRouter(USER_ACCESS_TOKEN)
+    .then(() => {
+      return ebController.fetchEvents();
+    })
     .then(events => res.json(events))
     .catch(err => res.sendStatus(err.status));
   });
