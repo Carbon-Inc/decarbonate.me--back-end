@@ -7,9 +7,6 @@ const superagent = require('superagent-bluebird-promise');
 const key = '123abc';
 const bpURL = 'http://impact.brighterplanet.com';
 
-const distance = 1750; //get actuall from IOS, in (km)
-let testDate = '2017-11-17';
-
 function _FPandPrice(footprint, price){
   this.footprint = footprint,
   this.price = price;
@@ -28,10 +25,10 @@ let _pricePrint = function(footprint){
 
 module.exports = exports = {};
 
-exports.carPrint = function(){
+exports.carPrint = function(date, dist){
   debug('bpRoutes');
   return new Promise((resolve, reject) => {
-    superagent.post(`${bpURL}/automobile_trips.json?key=${key}&date=${testDate/*req.body.event.start*/}&distance=${distance}`)
+    superagent.post(`${bpURL}/automobile_trips.json?key=${key}&date=${date}&distance=${dist}`)
     .then(res => {
       let body = JSON.parse(res.text);
       let price = _pricePrint(body.decisions.carbon.object.value);
@@ -45,10 +42,10 @@ exports.carPrint = function(){
   });
 };
 
-exports.busPrint = function(){
+exports.busPrint = function(date, dist){
   debug('bpRoutes');
   return new Promise((resolve, reject) => {
-    superagent.post(`${bpURL}/bus_trips.json?key=${key}&date=${testDate/*req.body.event.start*/}&distance=${distance}`)
+    superagent.post(`${bpURL}/bus_trips.json?key=${key}&date=${date}&distance=${dist}`)
     .then(res => {
       let body = JSON.parse(res.text);
       let price = _pricePrint(body.decisions.carbon.object.value);
@@ -62,10 +59,10 @@ exports.busPrint = function(){
   });
 };
 
-exports.planePrint = function(){
+exports.planePrint = function(date, dist){
   debug('bpRoutes');
   return new Promise((resolve, reject) => {
-    superagent.post(`${bpURL}/flights.json?key=${key}&date=${testDate/*req.body.event.start*/}&distance=${distance}`)
+    superagent.post(`${bpURL}/flights.json?key=${key}&date=${date}&distance=${dist}`)
     .then(res => {
       let body = JSON.parse(res.text);
       let price = _pricePrint(body.decisions.carbon.object.value);
