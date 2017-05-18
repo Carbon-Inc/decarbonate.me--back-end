@@ -23,8 +23,8 @@ module.exports = function(router) {
 
   router.get('/events', (req, res) => {
     debug('#GET /decarbonate/events');
-    const USER_ACCESS_TOKEN = req.query.params.code;
-    console.log(USER_ACCESS_TOKEN);
+    console.log(req);
+    const USER_ACCESS_TOKEN = req.url.hash.split('token=')[1];
     return ebRouter(USER_ACCESS_TOKEN)
     .then(() => {
       return ebController.fetchEvents();
