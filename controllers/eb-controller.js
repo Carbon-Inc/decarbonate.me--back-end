@@ -42,8 +42,3 @@ exports.getEventInfo = function(body) {
   })
   .catch(err => Promise.reject(err.message));
 };
-
-exports.fetchEvents = function() {
-  debug('#fetchEvents');
-  return Event.find({});
-};
