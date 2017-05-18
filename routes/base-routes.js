@@ -8,27 +8,30 @@ const ebController = require('../controllers/eb-controller');
 const bpRouter = require('./brighter-planet-routes');
 const CLIENT_KEY = process.env.CLIENT_KEY;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
+let USER_ACCESS_TOKEN;
 
 module.exports = function(router) {
-  // router.get('/token', urlParser, (req, res) => {
-  //   debug('#GET /decarbonate/token');
-  // });
+  router.get('/token', (req, res) => {
+    debug('#GET /decarbonate/token');
+    console.log(req);
+    USER_ACCESS_TOKEN = req.url.hash.split('token=')[1];
+    res.json(USER_ACCESS_TOKEN);
+  });
 
   router.post('/events', (req, res) => {
     debug('#POST /decarbonate/events');
-    return ebRouter()
+    return ebRouter(USER_ACCESS_TOKEN)
     .then(() => res.send())
     .catch(err => res.sendStatus(err.status));
   });
 
   router.get('/events', (req, res) => {
     debug('#GET /decarbonate/events');
-    console.log(req);
-    const USER_ACCESS_TOKEN = req.url.hash.split('token=')[1];
-    return ebRouter(USER_ACCESS_TOKEN)
-    .then(() => {
-      return ebController.fetchEvents();
-    })
+    // return ebRouter(USER_ACCESS_TOKEN)
+    // .then(() => {
+    //   return ebController.fetchEvents();
+    // })
+    return ebController.fetchEvents()
     .then(events => res.json(events))
     .catch(err => res.sendStatus(err.status));
   });
