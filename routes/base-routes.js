@@ -56,5 +56,6 @@ module.exports = function(router) {
     .then(data => res.json(data))
     .catch(err => res.sendStatus(err.status));
   });
+
   return router;
 };
