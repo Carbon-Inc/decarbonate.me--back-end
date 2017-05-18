@@ -37,21 +37,21 @@ module.exports = function(router) {
     .catch(err => res.sendStatus(err.status));
   });
 
-  router.post('/footprint/automobile/:startDate/:distance', (req,res) => {
+  router.get('/footprint/automobile/:startDate/:distance', (req,res) => {
     debug('#POST /decarbonate/footprint/automobile/:startDate/:distance');
     return bpRouter.carPrint(req.params.startDate, req.params.distance)
     .then(data => res.json(data))
     .catch(err => res.sendStatus(err.status));
   });
 
-  router.post('/footprint/bus/:startDate/:distance', (req,res) => {
+  router.get('/footprint/bus/:startDate/:distance', (req,res) => {
     debug('#POST /decarbonate/footprint/bus');
     return bpRouter.busPrint(req.params.startDate, req.params.distance)
     .then(data => res.json(data))
     .catch(err => res.sendStatus(err.status));
   });
 
-  router.post('/footprint/plane/:startDate/:distance', (req,res) => {
+  router.get('/footprint/plane/:startDate/:distance', (req,res) => {
     debug('#POST /decarbonate/footprint/plane');
     return bpRouter.planePrint(req.params.startDate, req.params.distance)
     .then(data => res.json(data))
