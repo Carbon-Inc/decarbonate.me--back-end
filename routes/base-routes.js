@@ -4,8 +4,6 @@ const debug = require('debug')('decarbonate:base-routes');
 const ebRouter = require('./eb-routes');
 const bpRouter = require('./brighter-planet-routes');
 
-let USER_ACCESS_TOKEN;
-
 module.exports = function(router) {
   // router.post('/token', (req, res) => {
   //   debug('#GET /decarbonate/token');
@@ -15,7 +13,7 @@ module.exports = function(router) {
 
   router.post('/events', (req, res) => {
     debug('#GET /decarbonate/events');
-    let USER_ACCESS_TOKEN = req.body;
+    let USER_ACCESS_TOKEN = req.body.toString();
     // return ebRouter('DGKS6UUHIPJAOSJRQVPD')
     return ebRouter(USER_ACCESS_TOKEN)
     .then(events => res.json(events))
