@@ -52,10 +52,10 @@ describe('event-base-routes', function() {
     });
   });
 
-  describe('#POST /footprint/automobile', function(){
+  describe('#GET /footprint/automobile', function(){
     it('should return 404 on bad route', done => {
       chai.request(server)
-      .post('/decarbonate/footprint/badroute/2017-01-05/1000')
+      .get('/decarbonate/footprint/badroute/2017-01-05/1000')
       .end((err, res) => {
         expect(res).to.have.status(404);
         done();
@@ -63,7 +63,7 @@ describe('event-base-routes', function() {
     });
     it('should return 200 on proper request', done => {
       chai.request(server)
-      .post('/decarbonate/footprint/automobile/2017-01-05/1000')
+      .get('/decarbonate/footprint/automobile/2017-01-05/1000')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -72,10 +72,10 @@ describe('event-base-routes', function() {
 
   });
 
-  describe('#POST /footprint/bus', function(){
+  describe('#GET /footprint/bus', function(){
     it('should return 404 on bad route', done => {
       chai.request(server)
-      .post('/decarbonate/footprint/badroute/2017-01-05/1000')
+      .get('/decarbonate/footprint/badroute/2017-01-05/1000')
       .end((err, res) => {
         expect(res).to.have.status(404);
         done();
@@ -83,7 +83,7 @@ describe('event-base-routes', function() {
     });
     it('should return 200 on proper request', done => {
       chai.request(server)
-      .post('/decarbonate/footprint/bus/2017-01-05/1000')
+      .get('/decarbonate/footprint/bus/2017-01-05/1000')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -92,10 +92,10 @@ describe('event-base-routes', function() {
 
   });
 
-  describe('#POST /footprint/plane', function(){
+  describe('#GET /footprint/plane', function(){
     it('should return 404 on bad route', done => {
       chai.request(server)
-      .post('/decarbonate/footprint/badroute/2017-01-05/1000')
+      .get('/decarbonate/footprint/badroute/2017-01-05/1000')
       .end((err, res) => {
         expect(res).to.have.status(404);
         done();
@@ -103,7 +103,7 @@ describe('event-base-routes', function() {
     });
     it('should return 200 on proper request', done => {
       chai.request(server)
-      .post('/decarbonate/footprint/plane/2017-01-05/1000')
+      .get('/decarbonate/footprint/plane/2017-01-05/1000')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
