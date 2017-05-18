@@ -15,6 +15,7 @@ const Event = function(eventObj) {
   this.venueId = eventObj.venue_id || 'not specified';
   this.logoId = eventObj.logo_id || 'not specified';
   this.categoryId = eventObj.category_id || 'not specified';
+  this.paid = false;
 };
 
 module.exports = exports = {};
