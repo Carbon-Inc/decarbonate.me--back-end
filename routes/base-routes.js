@@ -2,6 +2,7 @@
 
 const debug = require('debug')('decarbonate:base-routes');
 const superagent = require('superagent-bluebird-promise');
+const urlParser = require('../lib/parse-url');
 const ebRouter = require('./eb-routes');
 const ebController = require('../controllers/eb-controller');
 const bpRouter = require('./brighter-planet-routes');
@@ -9,19 +10,10 @@ const CLIENT_KEY = process.env.CLIENT_KEY;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 module.exports = function(router) {
-  router.post('/oauth', (req, res) => {
-    debug('#POST /decarbonate/oauth');
-    superagent.get(`https://www.eventbrite.com/oauth/authorize?response_type=code&client_id=${CLIENT_KEY}`)
-    .then(() => {
-      res.send();
-    })
-    .catch(err => res.send(err));
-  });
-
-  router.get('/token', (req, res) => {
-    debug('#POST /decarbonate/token');
-    console.log(window.location.search.split('=')[1]);
-    superagent.post(`https://www.eventbrite.com/oauth/token?code=${window.location.search.split('=')[1]}&client_secret=${CLIENT_SECRET}&client_id=${CLIENT_KEY}&grant_type=authorization_code`)
+  router.post('/token/:code', urlParser, (req, res) => {
+    debug('#POST /decarbonate/token/:code');
+    console.log(req.params);
+    superagent.post(`https://www.eventbrite.com/oauth/token?code=${req.params.code}&client_secret=${CLIENT_SECRET}&client_id=${CLIENT_KEY}&grant_type=authorization_code`)
     .set('Content-type', 'application/x-www-form-urlencoded')
     .then(data => {
       console.log(data);
