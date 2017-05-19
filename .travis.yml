@@ -18,6 +18,7 @@ branches:
   only:
   - master  
   - staging
+  - master
   - test_branch
 before_script: npm i
 script:
