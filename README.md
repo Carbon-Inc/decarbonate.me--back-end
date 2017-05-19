@@ -19,7 +19,7 @@ There are hundreds of projects working toward a more sustainable world, each req
 
 ### Current Version (0.8.0)
 
-- User can log in through an Eventbrite account  (Eventbrite account is required to get passed the sign in. This uses OAuth2 to sign-in).
+- User can log in with an Eventbrite account (Eventbrite account is required to get signed in. This uses OAuth2 to sign-in).
 - The users events are fetched from Eventbrite and populated into the user and event schema.
 - The user selects a single event.
 - The user provides a starting point and mode of transportation (Automobile, Bus, or Flight) for the selected event.
@@ -33,9 +33,10 @@ There are hundreds of projects working toward a more sustainable world, each req
 - App sends updates for upcoming events that have not been offset.
 - Ability for an event organizer to see how many people have offset their trip.
 - More modes of transportation.
-- More specific types of transportation (ex: Car || diesel, hybrid, electric, ect.).
+- More specific types of transportation (ex: Car || diesel, hybrid, electric, etc).
 - Optional ability for a user to select an offset project to pay for.
-- Allow event organizers to pay for offsets
+- B2B app for Event Organizers with organizers' dashboard.
+  - Allow event organizers to pay for offsets.
 
 ### Architecture
 
@@ -43,27 +44,41 @@ This API uses the Model View Controller (MVC) architecture pattern. It is built 
 
 ### Data Schemas
 
+We created two schemas for use in our app. The User model and Event Schema.
+
+#####User Schema
+
+For example:
+```
+{
+  userId: '12345678',
+  oAuthToken: 'GA31802DGOQLS103',
+};
+```
+
+
 ### Routes
 ##### POST /decarbonate/events
 User signs-in through use of OAuth2 to receive an Eventbrite token. Then events are retrieved from the user's Eventbrite account using the Eventbrite token.
 
-Each event is then used to produce a new event Schema with only the properties we need. Example event:
+Each event is then used to produce a new event Schema with only the properties we need.
+
+#####Event Schema:
 ```
-{
-  eventId: '12345678901',
-  userId: '41994236240',
-  name: 'Example Event Name',
-  start: '2017-05-17T21:01:39Z',
-  end: '2017-05-17T21:05:10Z',
-  description: 'This is a test event description. It will likely be a few sentences in length.',
-  eventAddress: '1233 2nd Ave, Seattle, WA 98111',
-  originAddress: '1234 1st Ave, Seattle, WA 98111',
-  img: 'https://img.evbuc.com/1234imgaddresshere',
-  category: 'Music',
-  carbon: null,
-  carbonPrice: null,
-  paid: false,
-};
+  {
+    name: 'Example Event Name',
+    start: '2017-05-17T21:01:39Z',
+    end: '2017-05-17T21:05:10Z',
+    description: 'This is a test event description. It will likely be a few sentences in length.',
+    address: '1233 2nd Ave, Seattle, WA 98111',
+    eventId: '12345678901',
+    venueId: '12459023',
+    logoId: '1203810',
+    img: 'https://img.evbuc.com/1234imgaddresshere',
+    category: 'Music',
+    categoryId: '1995923',
+    paid: false,
+  };
 ```
 
 ##### GET /decarbonate/events
@@ -114,7 +129,6 @@ Add additional notes about how to deploy this on a live system
 * [MongoDB](https://www.mongodb.com/)
 
 
-
 ### Authors
 
 * **Brianna Burrows** -[brisourceful](https://github.com/brisourceful)
@@ -127,3 +141,8 @@ See also the full list of [developers](https://github.com/Carbon-Inc/people) who
 ### License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* The JS and iOS TA's for their assistance.
+* Caffeine
