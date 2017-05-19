@@ -2,23 +2,27 @@
 
 const debug = require('debug')('decarbonate:eb-controller');
 const createError = require('http-errors');
+const User = require('../models/user');
+const Event = require('../models/event');
 
-const Event = function(eventObj) {
-  this.name  =eventObj.name.text || 'not specified';
-  this.description = eventObj.description.text || 'not specified';
-  this.img = eventObj.logo.original.url || 'not specified';
-  this.category = eventObj.category.name || 'not specified';
-  this.start = eventObj.start.local || 'not specified';
-  this.end = eventObj.end.local || 'not specified';
-  this.address = eventObj.venue.address.localized_address_display || 'not specified';
-  this.eventId = eventObj.id || 'not specified';
-  this.venueId = eventObj.venue_id || 'not specified';
-  this.logoId = eventObj.logo_id || 'not specified';
-  this.categoryId = eventObj.category_id || 'not specified';
-  this.paid = false;
+let eventIds = [];
+module.exports = exports = {};
+
+exports.createUser = function(body) {
+  debug('#getUserInfo');
+  body = JSON.parse(body);
+  let userObj = {
+    userId: body.id,
+    name: body.name,
+    email: body.emails[0].email,
+  };
+  return new User(userObj);
 };
 
-module.exports = exports = {};
+exports.createEvent = function(newEvent) {
+  debug('#createEvent');
+  return new Event(newEvent).save();
+};
 
 exports.getEventInfo = function(body) {
   debug('#getEventInfo');
@@ -34,12 +38,27 @@ exports.getEventInfo = function(body) {
     resolve(tempEvents);
   })
   .then(eventsArr => {
-    let events = [];
     for (let i = 0; i < eventsArr.length; i++) {
-      let newEvent = new Event(eventsArr[i]);
-      events.push(newEvent);
+      let ev = {
+        eventId: eventsArr[i].id,
+        venueId: eventsArr[i].venue_id,
+        logoId: eventsArr[i].logo_id,
+        categoryId: eventsArr[i].category_id,
+        name: eventsArr[i].category.name,
+        start: eventsArr[i].start.local,
+        end: eventsArr[i].end.local,
+        description: eventsArr[i].description.text,
+        address: eventsArr[i].venue.address.localized_address_display,
+        img: eventsArr[i].logo.original.url,
+        category: eventsArr[i].category.name,
+        paid: false,
+        transport: null,
+      };
+      exports.createEvent(ev)
+      .then(eve => eventIds.push(eve._id))
+      .catch(err => Promise.reject(err.message));
     }
-    return Promise.resolve(events);
+    return Promise.resolve(eventIds);
   })
   .catch(err => Promise.reject(err.message));
 };

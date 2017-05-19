@@ -9,7 +9,6 @@ const superagent = require('superagent');
 const mongoose = require('mongoose');
 const server = require('../server');
 
-
 describe('event-base-routes', function() {
   describe('#POST /decarbonate/events', function () {
     it('should return a 200 if given the proper route', done => {
