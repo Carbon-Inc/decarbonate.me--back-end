@@ -33,7 +33,7 @@ There are hundreds of projects working toward a more sustainable world, each req
 - App sends updates for upcoming events that have not been offset.
 - Ability for an event organizer to see how many people have offset their trip.
 - More modes of transportation.
-- More specific types of transportation (ex: Car || diesel, hybrid, electric, ect.).
+- More specific types of transportation (ex: Car || diesel, hybrid, electric, etc).
 - Optional ability for a user to select an offset project to pay for.
 - B2B app for Event Organizers with organizers' dashboard.
   - Allow event organizers to pay for offsets.
@@ -65,20 +65,20 @@ Each event is then used to produce a new event Schema with only the properties w
 
 #####Event Schema:
 ```
-{
-  name: 'Example Event Name',
-  start: '2017-05-17T21:01:39Z',
-  end: '2017-05-17T21:05:10Z',
-  description: 'This is a test event description. It will likely be a few sentences in length.',
-  address: '1233 2nd Ave, Seattle, WA 98111',
-  eventId: '12345678901',
-  venueId: '12459023',
-  logoId: '1203810',
-  img: 'https://img.evbuc.com/1234imgaddresshere',
-  category: 'Music',
-  categoryId: '1995923',
-  paid: false,
-};
+  {
+    name: 'Example Event Name',
+    start: '2017-05-17T21:01:39Z',
+    end: '2017-05-17T21:05:10Z',
+    description: 'This is a test event description. It will likely be a few sentences in length.',
+    address: '1233 2nd Ave, Seattle, WA 98111',
+    eventId: '12345678901',
+    venueId: '12459023',
+    logoId: '1203810',
+    img: 'https://img.evbuc.com/1234imgaddresshere',
+    category: 'Music',
+    categoryId: '1995923',
+    paid: false,
+  };
 ```
 
 ##### GET /decarbonate/events
@@ -129,7 +129,6 @@ Add additional notes about how to deploy this on a live system
 * [MongoDB](https://www.mongodb.com/)
 
 
-
 ### Authors
 
 * **Brianna Burrows** -[brisourceful](https://github.com/brisourceful)
@@ -142,3 +141,8 @@ See also the full list of [developers](https://github.com/Carbon-Inc/people) who
 ### License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* The JS and iOS TA's for their assistance.
+* Caffeine
