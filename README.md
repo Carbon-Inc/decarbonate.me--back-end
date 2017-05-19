@@ -46,7 +46,7 @@ This API uses the Model View Controller (MVC) architecture pattern. It is built 
 ### Routes
 ##### POST /decarbonate/events
 User signs-in through use of OAuth2 to receive an Eventbrite token. Then events are retrieved from the user's Eventbrite account using the Eventbrite token.
-```
+
 Each event is then used to produce a new event Schema with only the properties we need. Example event:
 ```
 {
@@ -63,30 +63,38 @@ Each event is then used to produce a new event Schema with only the properties w
   carbon: null,
   carbonPrice: null,
   paid: false,
-  transport: null,
 };
 ```
 
 ##### GET /decarbonate/events
 Used to get all the events in the event schemas from MongoDB.
 
-##### POST /decarbonate/footprint/automobile
-Used to call the Brighter Planet API to get the carbon footprint in kg given a distance(km) and event start date for an automobile.
+##### GET /decarbonate/footprint/automobile/:startDate/:distance
+Used to call the Brighter Planet API to get the carbon footprint in kg given a distance(km) and event start date(YYYY-MM-DD) for an automobile.
 Example output for 100km on November 17th 2017:
 ```
-30.167784708327414
+{
+  footprint: 66.51 //(lbs)
+  price: 0.33 //($)
+}
 ```
-##### POST /decarbonate/footprint/bus
-Used to call the Brighter Planet API to get the carbon footprint in kg given a distance(km) and event start date for a bus.
+##### GET /decarbonate/footprint/bus/:startDate/:distance
+Used to call the Brighter Planet API to get the carbon footprint in kg given a distance(km) and event start date(YYYY-MM-DD) for a bus.
 Example output for 100km on November 17th 2017:
 ```
-14.36814128473358
+{
+  footprint: 31.68 //(lbs)
+  price: 0.16 //($)
+}
 ```
-##### POST /decarbonate/footprint/plane
-Used to call the Brighter Planet API to get the carbon footprint in kg given a distance(km) and event start date for a flight.
+##### GET /decarbonate/footprint/plane/:startDate/:distance
+Used to call the Brighter Planet API to get the carbon footprint in kg given a distance(km) and event start date(YYYY-MM-DD) for a flight.
 Example output for 1000km on November 17th 2017:
 ```
-10810.5518293028124
+{
+  footprint: 2384.41 //(lbs)
+  price: 11.91 //($)
+}
 ```
 
 ### Testing
