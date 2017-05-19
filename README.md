@@ -1,6 +1,6 @@
 # Decarbonate.me
 
-[![Build Status](https://travis-ci.org/Carbon-Inc/decarbonate.me--back-end.svg?branch=master)](https://travis-ci.org/Carbon-Inc/decarbonate.me--back-end) [![Coverage Status](https://coveralls.io/repos/github/Carbon-Inc/decarbonate.me--back-end/badge.svg?branch=staging)](https://coveralls.io/github/Carbon-Inc/decarbonate.me--back-end?branch=staging)
+[![Build Status](https://travis-ci.org/Carbon-Inc/decarbonate.me--back-end.svg?branch=master)](https://travis-ci.org/Carbon-Inc/decarbonate.me--back-end) [![Coverage Status](https://coveralls.io/repos/github/Carbon-Inc/decarbonate.me--back-end/badge.svg?branch=master)](https://coveralls.io/github/Carbon-Inc/decarbonate.me--back-end?branch=master)
 
 ### Overview
 
