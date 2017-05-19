@@ -7,7 +7,7 @@ const bpRouter = require('./brighter-planet-routes');
 module.exports = function(router) {
   router.post('/events', (req, res) => {
     debug('#POST /decarbonate/events');
-    let USER_ACCESS_TOKEN = req.body.token;
+    let USER_ACCESS_TOKEN = req.body.token || process.env.USER_ACCESS_TOKEN;
     return ebRouter(USER_ACCESS_TOKEN)
     .then(events => res.json(events))
     .catch(err => res.sendStatus(err.status));
