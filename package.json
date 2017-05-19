@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint ./server.js",
     "test-debug": "npm run lint && DEBUG=decarbonate* mocha",
     "build": "npm run lint && npm run test",
     "start": "node server.js",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "aws-sdk-mock": "^1.7.0",
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "istanbul": "^0.4.5",
@@ -50,7 +51,9 @@
     "http-errors": "^1.6.1",
     "mongoose": "^4.9.9",
     "morgan": "^1.8.1",
+    "querystring": "^0.2.0",
     "superagent": "^3.5.2",
-    "superagent-bluebird-promise": "^4.2.0"
+    "superagent-bluebird-promise": "^4.2.0",
+    "url": "^0.11.0"
   }
 }
