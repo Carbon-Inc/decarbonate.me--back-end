@@ -3,7 +3,8 @@
 const debug = require('debug')('decarbonate:eb-controller');
 const createError = require('http-errors');
 
-const Event = function(eventObj) {
+
+const Event = exports.eventConstructor = function(eventObj) {
   this.name  =eventObj.name.text || 'not specified';
   this.description = eventObj.description.text || 'not specified';
   this.img = eventObj.logo.original.url || 'not specified';

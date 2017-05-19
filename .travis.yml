@@ -16,6 +16,7 @@ sudo: required
 # safelist
 branches:
   only:
+  - master  
   - staging
   - master
   - test_branch
